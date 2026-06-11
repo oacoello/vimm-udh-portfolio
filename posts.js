@@ -138,6 +138,26 @@ window.PROJECT_POSTS = [
     }
   ]
 },
+{
+  "id": "sistema-automatico-de-distribucion-de-agua-mediante-plc",
+  "title": "Sistema Automático de Distribución de Agua mediante PLC",
+  "author": "Alex Soto, Valery Gomez, Miguel Alvarado, Rodolfo Zúniga, ARES, Génesis Villalta",
+  "date": "2026-03-19",
+  "category": "Proyectos",
+  "tags": [
+    "PLC",
+    "Siemens",
+    "Automatización"
+  ],
+  "excerpt": "Mediante la mecanización y automatización por controlador lógico, se permite la distribución automática del bombeo de agua al edificio taller del Instituto de Desarrollo e Investigación.",
+  "coverImage": "assets\\proyectos\\bombeo-alex\\alex-bombeo1.jpg",
+  "images": [
+    "assets\\proyectos\\bombeo-alex\\alex-bombeo1.jpg",
+    "assets\\proyectos\\bombeo-alex\\alex-bombeo2.jpg",
+    "assets\\proyectos\\bombeo-alex\\alex-bombeo3.jpg",
+    "assets\\proyectos\\bombeo-alex\\alex-bombeo4.jpg"
+  ]
+},
   {
     id: "practica-sistemas-telecomunicaciones",
     title: "Práctica en Sistemas de Telecomunicaciones: Innovación y Aprendizaje Continuo",
