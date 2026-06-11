@@ -1,5 +1,5 @@
-const ACCESS_USER = 'admin';
-const ACCESS_PASSWORD = 'admin';
+const ACCESS_USER = 'root';
+const ACCESS_PASSWORD = 'ares8814';
 
 function setAdminAccess(enabled) {
   document.querySelectorAll('.admin-only').forEach((item) => { item.hidden = !enabled; });
