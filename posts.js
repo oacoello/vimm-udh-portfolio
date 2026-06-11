@@ -6,7 +6,79 @@
 */
 
 window.PROJECT_POSTS = [
-  {
+{
+  "id": "prototipo-de-silla-de-ruedas-para-personas-cuadriplejicas",
+  "title": "Prototipo de Silla de Ruedas para personas cuadripléjicas",
+  "author": "Obil Tinoco, Anrold Garay",
+  "date": "2026-06-11",
+  "category": "Proyectos de Graduación",
+  "tags": [
+    "Microcontroladores",
+    "Automatización"
+  ],
+  "excerpt": "Desarrollo de prototipo de silla de ruedas para personas cuadripléjicas controlada por el movimiento de la cabeza y comandos de voz orientado a niños.",
+  "coverImage": "assets\\proyectos\\obil-garay\\obilgaray1.jpg",
+  "images": [
+    "assets\\proyectos\\obil-garay\\obilgaray1.jpg"
+  ],
+  "content": [
+    "Objetivo: Diseñar un prototipo de silla de ruedas inteligente, controlada mediante movimientos de la cabeza y comandos de voz, utilizando sensores inerciales, que permita mejorar la movilidad y autonomía de niños con cuadriplejia en contextos de recursos limitados."
+  ]
+},
+{
+  "id": "centro-de-tiro",
+  "title": "Centro De Tiro",
+  "author": "Orlin Gomez, Oscar Coello, Rodolfo Zúniga",
+  "date": "2026-06-11",
+  "category": "Proyectos de Graduación",
+  "tags": [
+    "Software",
+    "Balística",
+    "Matemáticas"
+  ],
+  "excerpt": "El proyecto Sistema Artillero “CDT Santa Bárbara” busca sustituir la calculadora HP-71B, actualmente obsoleta, por un sistema digital moderno para realizar cálculos de dirección de tiro en obuses M102 y M198. La solución utiliza software de código abierto, un motor balístico validado con tablas oficiales y una red local para permitir el trabajo simultáneo de varios operadores. Con esto se reducen errores, riesgos operativos, dependencia de equipos antiguos y costos, fortaleciendo la capacidad tecnológica de las Fuerzas Armadas de Honduras.",
+  "coverImage": "assets\\proyectos\\cdt-sb\\cdt0.JPG",
+  "youtube": [
+    "https://youtu.be/Xv6kezoTmO4"
+  ],
+  "images": [
+    "assets\\proyectos\\cdt-sb\\cdt0.JPG",
+    "assets\\proyectos\\cdt-sb\\cdt1.png",
+    "assets\\proyectos\\cdt-sb\\cdt2.png",
+    "assets\\proyectos\\cdt-sb\\cdt3.jpg",
+    "assets\\proyectos\\cdt-sb\\cdt4.JPG",
+    "assets\\proyectos\\cdt-sb\\cdt5.JPG"
+  ],
+  "content": [
+    "El proyecto presenta el desarrollo del Sistema Artillero “CDT Santa Bárbara”, una solución digital creada mediante ingeniería inversa para sustituir la calculadora HP-71B en los cálculos de dirección de tiro de los obuses M102 de 105 mm y M198 de 155 mm. La investigación parte del problema de que las HP-71B usadas por las unidades de artillería están obsoletas, son pocas y ya no cuentan con soporte técnico, lo que obliga al personal a realizar cálculos manuales con mayor riesgo de error operativo.",
+    "El objetivo principal es crear un sistema moderno, preciso y confiable que reduzca la dependencia de equipos descontinuados. Para ello, se desarrolló un motor balístico validado con tablas oficiales, utilizando métodos numéricos como RK4 y el método de la secante, además de una infraestructura de red local con tres nodos para permitir el uso simultáneo y mejorar la disponibilidad del sistema.",
+    "La metodología fue aplicada, cuantitativa y tecnológico-experimental. Incluyó encuestas a personal artillero, observación directa, análisis documental de manuales técnicos y validación del software contra tablas de tiro oficiales. El sistema fue diseñado con hardware reacondicionado, software de código abierto, PostgreSQL e interfaz web, logrando un costo relativamente bajo y fortaleciendo la soberanía tecnológica institucional.",
+    "En conclusión, el proyecto permite modernizar el Centro de Dirección de Tiro, reducir riesgos por el uso de equipos obsoletos, mejorar la rapidez y precisión de los cálculos, y ofrecer una solución mantenible por la propia institución. Como recomendaciones, se plantea realizar pruebas de campo con fuego real, capacitar al personal, ampliar la base de datos balística y mantener el código fuente y documentación bajo control institucional."
+  ],
+  "links": [
+    {
+      "label": "https://github.com/oacoello/cdt-santabarbara",
+      "url": "#"
+    }
+  ]
+},
+{
+  "id": "monitoreo-y-tratamiento-de-agua",
+  "title": "Monitoreo y Tratamiento de Agua",
+  "author": "Alejandra Fortín, Ruth Juarez",
+  "date": "2026-06-11",
+  "category": "Proyectos de Graduación",
+  "excerpt": "Sistema móvil integrado de monitoreo y tratamiento de la calidad del agua en los municipios de Concepción de María y El Corpus, Choluteca",
+  "coverImage": "assets\\proyectos\\agua\\agua1.jpg",
+  "images": [
+    "assets\\proyectos\\agua\\agua1.jpg"
+  ],
+  "content": [
+    "Sistema móvil integrado de monitoreo y tratamiento de la calidad del agua en los municipios de Concepción de María y El Corpus, Choluteca",
+    "Objetivo: Implementar un sistema integrado de monitoreo y tratamiento de la calidad del agua que facilite la medición de variables críticas y añada procesos básicos de purificación para  aumentar la seguridad del recurso hídrico."
+  ]
+},
+{
   "id": "programacion-de-banda-industrial-lucas-nuelle",
   "title": "Programación de Banda Industrial Lucas Nüelle",
   "author": "V-IMM",
