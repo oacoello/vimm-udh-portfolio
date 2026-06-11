@@ -13,8 +13,7 @@
   <nav id="navbar">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <span class="logo-badge">IMM</span>
-        <span class="logo-roman">V</span>
+        <img class="nav-logo-img" src="assets/images/udhlogo0.png" alt="Logo Universidad de Defensa de Honduras">
       </a>
       <ul class="nav-links">
         <li><a href="index.html">Volver al sitio</a></li>
@@ -28,6 +27,10 @@
         <span class="section-tag">Editor visual</span>
         <h1>Crear post de proyecto</h1>
         <p>Completá el formulario, revisá la previsualización y copiá el bloque generado en <strong>posts.js</strong>.</p>
+        <label class="import-post">
+          Importar .txt generado
+          <input id="importPostTxt" type="file" accept=".txt,.json,application/json,text/plain">
+        </label>
       </div>
 
       <div class="editor-layout">
@@ -51,6 +54,10 @@
             <legend>Multimedia y recursos</legend>
             <label>Imagen de portada <input name="coverImage" placeholder="assets/proyectos/mi-proyecto/portada.jpg"></label>
             <label>Imágenes de galería <textarea name="images" rows="4" placeholder="Una ruta por línea"></textarea></label>
+            <div class="inline-adder">
+              <label>Agregar video de YouTube <input id="videoUrlInput" type="url" placeholder="https://www.youtube.com/watch?v=..."></label>
+              <button type="button" class="btn btn-ghost" id="addVideo">Agregar video</button>
+            </div>
             <label>Videos de YouTube <textarea name="youtube" rows="4" placeholder="Un enlace por línea"></textarea></label>
             <label>Links externos <textarea name="links" rows="4" placeholder="Etiqueta | https://enlace.com"></textarea></label>
           </fieldset>
@@ -58,6 +65,7 @@
           <div class="editor-actions">
             <button type="button" class="btn btn-primary" id="copyPost">Copiar bloque</button>
             <button type="button" class="btn btn-ghost" id="downloadPost">Descargar .txt</button>
+            <button type="button" class="btn btn-ghost" id="downloadHtml">Descargar página HTML</button>
             <button type="reset" class="btn btn-ghost">Limpiar</button>
           </div>
         </form>

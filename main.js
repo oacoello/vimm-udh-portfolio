@@ -2,11 +2,15 @@ const navbar = document.getElementById('navbar');
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
 const postsGrid = document.getElementById('postsGrid');
-const postDetail = document.getElementById('postDetail');
+const featuredGrid = document.getElementById('featuredGrid');
+const homeVideoGrid = document.getElementById('homeVideoGrid');
+const videoGrid = document.getElementById('videoGrid');
+const videoEmptyState = document.getElementById('videoEmptyState');
 const emptyState = document.getElementById('emptyState');
 const postSearch = document.getElementById('postSearch');
 const categoryFilters = document.getElementById('categoryFilters');
 const posts = Array.isArray(window.PROJECT_POSTS) ? window.PROJECT_POSTS : [];
+const standaloneVideos = Array.isArray(window.STANDALONE_VIDEOS) ? window.STANDALONE_VIDEOS : [];
 
 function updateNavbarShadow() {
   navbar?.classList.toggle('scrolled', window.scrollY > 8);
@@ -21,14 +25,83 @@ function escapeHtml(value = '') {
     .replaceAll("'", '&#039;');
 }
 
-function youtubeEmbedUrl(url = '') {
-  const match = String(url).match(/(?:v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{6,})/);
-  return match ? `https://www.youtube.com/embed/${match[1]}` : '';
-}
-
 function formatDate(date) {
   if (!date) return 'Sin fecha';
   return new Intl.DateTimeFormat('es-HN', { dateStyle: 'medium' }).format(new Date(`${date}T00:00:00`));
+}
+
+function postUrl(post) {
+  return `posts/${encodeURIComponent(post.id)}.html`;
+}
+
+function youtubeEmbedUrl(url = '') {
+  const match = String(url).match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([A-Za-z0-9_-]{6,})/);
+  return match ? `https://www.youtube.com/embed/${match[1]}` : '';
+}
+
+function youtubeVideoId(url = '') {
+  const match = String(url).match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([A-Za-z0-9_-]{6,})/);
+  return match ? match[1] : '';
+}
+
+function youtubeThumbnailUrl(url = '') {
+  const id = youtubeVideoId(url);
+  return id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : '';
+}
+
+function getVideos() {
+  const postVideos = posts.flatMap((post) =>
+    (post.youtube ?? [])
+      .map((url, index) => ({
+        id: `${post.id}-${index}`,
+        title: post.title,
+        category: post.category,
+        postUrl: postUrl(post),
+        embedUrl: youtubeEmbedUrl(url),
+        sourceUrl: url,
+        thumbnailUrl: youtubeThumbnailUrl(url),
+        description: post.excerpt,
+      }))
+      .filter((video) => video.embedUrl)
+  );
+
+  const independentVideos = standaloneVideos
+    .map((video) => ({
+      id: video.id,
+      title: video.title,
+      category: video.category || 'Video',
+      postUrl: video.link || '',
+      embedUrl: youtubeEmbedUrl(video.youtube || video.url),
+      sourceUrl: video.youtube || video.url,
+      thumbnailUrl: video.thumbnail || youtubeThumbnailUrl(video.youtube || video.url),
+      description: video.description,
+    }))
+    .filter((video) => video.embedUrl);
+
+  return [...independentVideos, ...postVideos];
+}
+
+function postCard(post) {
+  return `
+    <article class="blog-card">
+      ${post.coverImage ? `<img src="${escapeHtml(post.coverImage)}" alt="${escapeHtml(post.title)}" loading="lazy">` : '<div class="blog-card-placeholder">UDH</div>'}
+      <div class="blog-card-body">
+        <span class="proj-tag">${escapeHtml(post.category || 'Publicación')}</span>
+        <h3>${escapeHtml(post.title)}</h3>
+        <p>${escapeHtml(post.excerpt || 'Publicación estudiantil.')}</p>
+        <div class="post-meta">
+          <span>${escapeHtml(post.author || 'Autor pendiente')}</span>
+          <span>${formatDate(post.date)}</span>
+        </div>
+        <div class="project-tech">
+          ${(post.tags ?? []).map((tag) => `<span>${escapeHtml(tag)}</span>`).join('')}
+        </div>
+      </div>
+      <div class="project-footer">
+        <a class="proj-link" href="${postUrl(post)}">Leer publicación →</a>
+      </div>
+    </article>
+  `;
 }
 
 function getCategories() {
@@ -66,94 +139,52 @@ function renderPosts() {
     return matchesSearch && matchesCategory;
   });
 
-  postsGrid.innerHTML = filteredPosts.map((post) => `
-    <article class="blog-card">
-      ${post.coverImage ? `<img src="${escapeHtml(post.coverImage)}" alt="${escapeHtml(post.title)}" loading="lazy">` : '<div class="blog-card-placeholder">IMM-V</div>'}
-      <div class="blog-card-body">
-        <span class="proj-tag">${escapeHtml(post.category || 'Proyecto')}</span>
-        <h3>${escapeHtml(post.title)}</h3>
-        <p>${escapeHtml(post.excerpt || 'Publicación de proyecto estudiantil.')}</p>
-        <div class="post-meta">
-          <span>${escapeHtml(post.author || 'Autor pendiente')}</span>
-          <span>${formatDate(post.date)}</span>
-        </div>
-        <div class="project-tech">
-          ${(post.tags ?? []).map((tag) => `<span>${escapeHtml(tag)}</span>`).join('')}
-        </div>
-      </div>
-      <div class="project-footer">
-        <a class="proj-link" href="#post/${encodeURIComponent(post.id)}">Leer publicación →</a>
-      </div>
-    </article>
-  `).join('');
-
+  postsGrid.innerHTML = filteredPosts.map(postCard).join('');
   emptyState.hidden = filteredPosts.length > 0;
 }
 
-function renderPostDetail(post) {
-  if (!postDetail || !postsGrid) return;
-
-  const videos = (post.youtube ?? [])
-    .map(youtubeEmbedUrl)
-    .filter(Boolean)
-    .map((url) => `
-      <div class="video-frame">
-        <iframe src="${escapeHtml(url)}" title="${escapeHtml(post.title)}" allowfullscreen loading="lazy"></iframe>
-      </div>
-    `)
+function renderFeaturedPosts() {
+  if (!featuredGrid) return;
+  featuredGrid.innerHTML = posts
+    .filter((post) => post.category === 'Proyectos')
+    .slice(0, 3)
+    .map(postCard)
     .join('');
-
-  postDetail.innerHTML = `
-    <a class="back-link" href="#proyectos">← Volver a publicaciones</a>
-    <header class="post-header">
-      <span class="section-tag">${escapeHtml(post.category || 'Proyecto')}</span>
-      <h2>${escapeHtml(post.title)}</h2>
-      <div class="post-meta">
-        <span>${escapeHtml(post.author || 'Autor pendiente')}</span>
-        <span>${formatDate(post.date)}</span>
-      </div>
-    </header>
-    ${post.coverImage ? `<img class="post-cover" src="${escapeHtml(post.coverImage)}" alt="${escapeHtml(post.title)}">` : ''}
-    <div class="post-content">
-      ${(post.content ?? []).map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join('')}
-    </div>
-    ${videos ? `<div class="post-media"><h3>Videos</h3>${videos}</div>` : ''}
-    ${(post.images ?? []).length ? `
-      <div class="post-gallery">
-        ${(post.images ?? []).map((image) => `<img src="${escapeHtml(image)}" alt="${escapeHtml(post.title)}" loading="lazy">`).join('')}
-      </div>
-    ` : ''}
-    ${(post.links ?? []).length ? `
-      <div class="post-links">
-        <h3>Recursos</h3>
-        ${(post.links ?? []).map((link) => `<a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a>`).join('')}
-      </div>
-    ` : ''}
-  `;
-
-  postDetail.hidden = false;
-  postsGrid.hidden = true;
-  emptyState.hidden = true;
 }
 
-function route() {
-  const [, postId] = window.location.hash.match(/^#post\/(.+)$/) ?? [];
-  const post = posts.find((item) => item.id === decodeURIComponent(postId ?? ''));
+function videoCard(video) {
+  return `
+    <article class="video-card">
+      <a class="video-thumbnail" href="${escapeHtml(video.sourceUrl || video.embedUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Ver video: ${escapeHtml(video.title)}">
+        ${video.thumbnailUrl ? `<img src="${escapeHtml(video.thumbnailUrl)}" alt="${escapeHtml(video.title)}" loading="lazy">` : '<div class="blog-card-placeholder">VIDEO</div>'}
+        <span class="play-badge">▶</span>
+      </a>
+      <div class="video-card-body">
+        <span class="proj-tag">${escapeHtml(video.category || 'Video')}</span>
+        <h3>${escapeHtml(video.title)}</h3>
+        ${video.description ? `<p>${escapeHtml(video.description)}</p>` : ''}
+        ${video.postUrl ? `<a class="proj-link" href="${escapeHtml(video.postUrl)}">Ver más →</a>` : ''}
+      </div>
+    </article>
+  `;
+}
 
-  if (post) {
-    renderPostDetail(post);
-    return;
-  }
+function renderHomeVideos() {
+  if (!homeVideoGrid) return;
+  const videos = getVideos().slice(0, 2);
+  homeVideoGrid.innerHTML = videos.length
+    ? videos.map(videoCard).join('')
+    : '<div class="empty-state"><h3>Videos pendientes</h3><p>Cuando agregues videos de YouTube a posts o a videos.js, aparecerán aquí automáticamente.</p></div>';
+}
 
-  if (postDetail && postsGrid) {
-    postDetail.hidden = true;
-    postsGrid.hidden = false;
-  }
-  renderPosts();
+function renderVideoGallery() {
+  if (!videoGrid || !videoEmptyState) return;
+  const videos = getVideos();
+  videoGrid.innerHTML = videos.map(videoCard).join('');
+  videoEmptyState.hidden = videos.length > 0;
 }
 
 window.addEventListener('scroll', updateNavbarShadow, { passive: true });
-window.addEventListener('hashchange', route);
 postSearch?.addEventListener('input', renderPosts);
 categoryFilters?.addEventListener('click', (event) => {
   if (!(event.target instanceof HTMLButtonElement)) return;
@@ -176,4 +207,7 @@ navLinks?.addEventListener('click', (event) => {
 
 updateNavbarShadow();
 renderCategoryFilters();
-route();
+renderPosts();
+renderFeaturedPosts();
+renderHomeVideos();
+renderVideoGallery();

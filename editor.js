@@ -1,8 +1,16 @@
+if (localStorage.getItem('immvAdminAccess') !== 'true') {
+  window.location.href = 'index.html';
+}
+
 const form = document.getElementById('postEditorForm');
 const generatedPost = document.getElementById('generatedPost');
 const postPreview = document.getElementById('postPreview');
 const copyPost = document.getElementById('copyPost');
 const downloadPost = document.getElementById('downloadPost');
+const downloadHtml = document.getElementById('downloadHtml');
+const importPostTxt = document.getElementById('importPostTxt');
+const videoUrlInput = document.getElementById('videoUrlInput');
+const addVideo = document.getElementById('addVideo');
 const editorStatus = document.getElementById('editorStatus');
 
 function slugify(value) {
@@ -34,6 +42,12 @@ function parseLinks(value) {
     const [label, ...urlParts] = line.split('|').map((item) => item.trim());
     return { label: label || 'Enlace', url: urlParts.join('|') || '#' };
   });
+}
+
+function stringifyLinks(links = []) {
+  return links
+    .map((link) => `${link.label || 'Enlace'} | ${link.url || ''}`)
+    .join('\n');
 }
 
 function escapeHtml(value = '') {
@@ -77,6 +91,7 @@ function cleanPost(post) {
 function updateEditor() {
   const post = getPostFromForm();
   const clean = cleanPost(post);
+  const videoCount = post.youtube.length;
   const code = `${JSON.stringify(clean, null, 2)},`;
 
   generatedPost.textContent = code;
@@ -93,8 +108,67 @@ function updateEditor() {
       <div class="project-tech">
         ${post.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join('')}
       </div>
+      ${videoCount ? `<p class="preview-note">${videoCount} video${videoCount === 1 ? '' : 's'} de YouTube agregado${videoCount === 1 ? '' : 's'}.</p>` : ''}
     </div>
   `;
+}
+
+function setField(name, value) {
+  const field = form.elements[name];
+  if (field) field.value = Array.isArray(value) ? value.join('\n') : (value ?? '');
+}
+
+function fillFormFromPost(post) {
+  setField('title', post.title);
+  setField('author', post.author);
+  setField('date', post.date);
+  setField('category', post.category);
+  setField('tags', Array.isArray(post.tags) ? post.tags.join(', ') : post.tags);
+  setField('excerpt', post.excerpt);
+  setField('coverImage', post.coverImage);
+  setField('youtube', post.youtube);
+  setField('images', post.images);
+  setField('content', post.content);
+  setField('links', Array.isArray(post.links) ? stringifyLinks(post.links) : post.links);
+  updateEditor();
+}
+
+function parseGeneratedPostText(text) {
+  const cleanText = text.trim().replace(/,\s*$/, '');
+  return JSON.parse(cleanText);
+}
+
+async function importGeneratedPost(event) {
+  const [file] = event.target.files;
+  if (!file) return;
+
+  try {
+    const text = await file.text();
+    const post = parseGeneratedPostText(text);
+    fillFormFromPost(post);
+    editorStatus.textContent = `Post importado desde ${file.name}. Revisá la previsualización antes de copiar.`;
+  } catch (error) {
+    editorStatus.textContent = 'No pude importar ese archivo. Tiene que ser el .txt generado por este editor.';
+  } finally {
+    event.target.value = '';
+  }
+}
+
+function addVideoUrl() {
+  const url = videoUrlInput.value.trim();
+  if (!url) return;
+
+  const youtubeField = form.elements.youtube;
+  const currentVideos = lines(youtubeField.value);
+
+  if (!currentVideos.includes(url)) {
+    currentVideos.push(url);
+  }
+
+  youtubeField.value = currentVideos.join('\n');
+  videoUrlInput.value = '';
+  updateEditor();
+  editorStatus.textContent = 'Video agregado al post.';
 }
 
 async function copyGeneratedPost() {
@@ -122,9 +196,65 @@ function downloadGeneratedPost() {
   editorStatus.textContent = 'Archivo descargado.';
 }
 
+function postHtmlTemplate(post) {
+  return `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="postTitle">${post.title || 'Nueva publicación'} — Ingeniería Militar en Mecatrónica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body data-asset-base="../">
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <img class="nav-logo-img" src="../assets/images/udhlogo0.png" alt="Logo UDH">
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="../projects.html">Proyectos</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main class="section page-top">
+    <div id="postRoot" class="container"></div>
+  </main>
+  <script>window.POST_ID = ${JSON.stringify(post.id)};</script>
+  <script src="../posts.js"></script>
+  <script src="../post-page.js"></script>
+</body>
+</html>
+`;
+}
+
+function downloadGeneratedHtml() {
+  const post = getPostFromForm();
+  const blob = new Blob([postHtmlTemplate(post)], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${post.id}.html`;
+  link.click();
+  URL.revokeObjectURL(url);
+  editorStatus.textContent = `Página descargada. Guardala en la carpeta posts/ como ${post.id}.html.`;
+}
+
 form.addEventListener('input', updateEditor);
 form.addEventListener('reset', () => setTimeout(updateEditor, 0));
 copyPost.addEventListener('click', copyGeneratedPost);
 downloadPost.addEventListener('click', downloadGeneratedPost);
+downloadHtml.addEventListener('click', downloadGeneratedHtml);
+importPostTxt.addEventListener('change', importGeneratedPost);
+addVideo.addEventListener('click', addVideoUrl);
+videoUrlInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    addVideoUrl();
+  }
+});
 
 updateEditor();

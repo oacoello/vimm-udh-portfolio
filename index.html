@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IMM-V · Proyectos de Mecatrónica — UDH</title>
+  <title>Ingeniería Militar en Mecatrónica — UDH</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -12,230 +12,34 @@
 <body>
   <nav id="navbar">
     <div class="nav-inner">
-      <a href="#inicio" class="nav-logo">
-        <span class="logo-badge">IMM</span>
-        <span class="logo-roman">V</span>
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false" aria-controls="navLinks">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#nosotros">Nosotros</a></li>
-        <li><a href="#proyectos">Blog de proyectos</a></li>
-        <li><a href="#facultad">Facultad</a></li>
-        <li><a href="editor.html" class="nav-cta">Crear post</a></li>
-      </ul>
+      <a href="index.html" class="nav-logo"><img class="nav-logo-img" src="assets/images/udhlogo0.png" alt="Logo Universidad de Defensa de Honduras"></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks"><li><a href="index.html">Inicio</a></li><li><a href="#nosotros">Nosotros</a></li><li><a href="projects.html">Proyectos</a></li><li><a href="videos.html">Videos</a></li><li><a href="#facultad">Facultad</a></li><li><a href="editor.html" class="nav-cta admin-only" hidden>Crear post</a></li></ul>
     </div>
   </nav>
 
   <section id="inicio" class="hero">
     <div class="hero-grid-bg"></div>
     <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="dot"></span>
-        Universidad de Defensa de Honduras · Quinta Promoción
-      </div>
-      <h1 class="hero-title">
-        Blog de proyectos<br>
-        <em>Mecatrónica</em>
-      </h1>
-      <p class="hero-subtitle">
-        Un espacio para documentar proyectos reales de estudiantes: imágenes, videos, enlaces, avances técnicos y aprendizajes.
-      </p>
-      <div class="hero-actions">
-        <a href="#proyectos" class="btn btn-primary">Ver publicaciones</a>
-        <a href="editor.html" class="btn btn-ghost">Crear post</a>
-      </div>
+      <div class="hero-logos"><img src="assets/images/udhlogo0.png" alt="Logo Universidad de Defensa de Honduras"><img src="assets/images/udhlogo1.png" alt="Logo secundario UDH"></div>
+      <h1 class="hero-title">Ingeniería Militar en<br><em>Mecatrónica</em></h1>
+      <p class="hero-subtitle">Este es el portfolio elaborado por los pasantes de la quinta promoción en Mecatrónica.</p>
+      <div class="hero-actions"><a href="#destacados" class="btn btn-primary">Ver destacados</a><a href="projects.html" class="btn btn-ghost">Todos los proyectos</a></div>
     </div>
-    <div class="hero-stat-strip">
-      <div class="stat-item">
-        <strong>5ª</strong>
-        <span>Promoción</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-item">
-        <strong>Blog</strong>
-        <span>Editable</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-item">
-        <strong>Media</strong>
-        <span>Fotos y YouTube</span>
-      </div>
-    </div>
+    <div class="hero-media container" aria-label="Galería de inicio"><img src="assets/images/home0.jpg" alt="Estudiantes de Ingeniería Mecatrónica UDH"><img src="assets/images/home1.jpg" alt="Actividad académica de Mecatrónica"><img src="assets/images/home2.jpg" alt="Práctica de estudiantes de Mecatrónica"><img src="assets/images/home3.jpg" alt="Proyecto estudiantil de Mecatrónica"><img src="assets/images/home4.jpg" alt="Experiencia académica de Mecatrónica"></div>
   </section>
 
-  <section id="nosotros" class="section nosotros-section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Sobre nosotros</span>
-        <h2>Documentación real,<br>no relleno</h2>
-      </div>
-      <div class="nosotros-grid">
-        <div class="nosotros-text">
-          <p class="lead-text">
-            Este sitio presenta la pasantía y los proyectos de la Quinta Promoción de Ingeniería Mecatrónica de la UDH.
-          </p>
-          <p>
-            La sección de proyectos funciona como un blog: cada publicación vive en un archivo de datos editable y puede incluir texto, etiquetas, enlaces, imágenes y videos de YouTube.
-          </p>
-          <p>
-            La regla es simple: si un dato no está verificado, no se publica como hecho. Primero fundamentos, después diseño. NO al revés.
-          </p>
-        </div>
-        <div class="nosotros-cards">
-          <div class="card-feature">
-            <div class="card-icon">01</div>
-            <h3>Contenido verificable</h3>
-            <p>Los proyectos se agregan cuando exista información real del equipo.</p>
-          </div>
-          <div class="card-feature">
-            <div class="card-icon">02</div>
-            <h3>Formato de blog</h3>
-            <p>Cada proyecto tiene su propia vista con detalle, galería y recursos.</p>
-          </div>
-          <div class="card-feature">
-            <div class="card-icon">03</div>
-            <h3>Hosteable</h3>
-            <p>Funciona como sitio estático: HTML, CSS y JavaScript sin servidor.</p>
-          </div>
-          <div class="card-feature">
-            <div class="card-icon">04</div>
-            <h3>Escalable</h3>
-            <p>Agregar publicaciones no exige tocar la estructura del HTML.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section id="nosotros" class="section nosotros-section"><div class="container"><div class="section-header"><span class="section-tag">Sobre nosotros</span><h2>Aprender haciendo,<br>documentar para crecer</h2></div><div class="nosotros-grid"><div class="nosotros-text"><p class="lead-text">En la Facultad de Ingeniería Mecatrónica de la Universidad de Defensa de Honduras nos dedicamos a formar profesionales altamente capacitados en una disciplina que integra ingeniería mecánica, electrónica, informática y control.</p><p>Nuestro objetivo es cultivar el talento necesario para enfrentar los retos tecnológicos del presente y el futuro, contribuyendo al desarrollo sostenible de nuestra nación.</p><p>La documentación meticulosa permite reflexionar sobre las experiencias, analizar resultados y formular preguntas críticas. La clave está en adquirir competencias prácticas: aprender haciendo, aplicar conocimientos y trabajar en entornos reales.</p></div><div class="nosotros-cards"><div class="card-feature"><div class="card-icon">01</div><h3>Proyectos estudiantiles</h3><p>Trabajos de robótica, automatización y soluciones técnicas.</p></div><div class="card-feature"><div class="card-icon">02</div><h3>Recursos educativos</h3><p>Materiales y experiencias que complementan la formación.</p></div><div class="card-feature"><div class="card-icon">03</div><h3>Eventos y actividades</h3><p>Talleres, conferencias, capacitaciones y visitas técnicas.</p></div><div class="card-feature"><div class="card-icon">04</div><h3>Red de contactos</h3><p>Conexión con exalumnos y profesionales de la industria.</p></div></div></div><div class="about-gallery" aria-label="Galería sobre nosotros"><img src="assets/images/about0.gif" alt="Actividad de Mecatrónica UDH"><img src="assets/images/about1.jpg" alt="Estudiantes de Mecatrónica"><img src="assets/images/about2.jpg" alt="Práctica de Mecatrónica"><img src="assets/images/about3.jpg" alt="Visita o capacitación de Mecatrónica"><img src="assets/images/about4.jpg" alt="Trabajo estudiantil de Mecatrónica"><img src="assets/images/about5.jpg" alt="Equipo de Mecatrónica"><img src="assets/images/about6.jpg" alt="Experiencia académica de Mecatrónica"></div></div></section>
 
-  <main id="proyectos" class="section blog-section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Blog de proyectos</span>
-        <h2>Publicaciones de<br>los estudiantes</h2>
-        <p class="section-desc">Agregá proyectos reales con el <a href="editor.html">editor visual</a>. El sitio genera las tarjetas y la vista completa automáticamente.</p>
-      </div>
+  <section id="destacados" class="section blog-section"><div class="container"><div class="section-header"><span class="section-tag">Inicio</span><h2>Proyectos destacados</h2><p class="section-desc">Una selección de proyectos elaborados por estudiantes de la quinta promoción.</p></div><div id="featuredGrid" class="blog-grid"></div><div class="featured-action"><a href="projects.html" class="btn btn-primary">Ver todos los proyectos y capacitaciones</a></div></div></section>
 
-      <div class="blog-toolbar">
-        <label class="search-box">
-          <span>Buscar</span>
-          <input id="postSearch" type="search" placeholder="Proyecto, autor, etiqueta..." />
-        </label>
-        <div id="categoryFilters" class="filter-tabs" aria-label="Filtros de categorías"></div>
-      </div>
 
-      <article id="postDetail" class="post-detail" hidden></article>
-      <div id="postsGrid" class="blog-grid"></div>
-      <div id="emptyState" class="empty-state" hidden>
-        <h3>Todavía no hay proyectos publicados</h3>
-        <p>Perfecto. Mejor vacío que inventado. Agregá el primer proyecto real desde <a href="editor.html">el editor</a>.</p>
-      </div>
-    </div>
-  </main>
 
-  <section id="publicar" class="section publish-section">
-    <div class="container">
-      <div class="publish-card">
-        <span class="section-tag">Cómo publicar</span>
-        <h2>Crear un post nuevo</h2>
-        <p>
-          Abrí el editor visual, completá los datos reales y copiá el resultado generado en <strong>posts.js</strong>.
-        </p>
-        <a href="editor.html" class="btn btn-primary">Abrir editor de posts</a>
-      </div>
-    </div>
-  </section>
+  <section id="videos" class="section video-gallery-section"><div class="container"><div class="section-header"><span class="section-tag">Videos</span><h2>Videos recientes</h2><p class="section-desc">Material audiovisual tomado automáticamente de publicaciones y videos independientes.</p></div><div id="homeVideoGrid" class="video-grid compact-video-grid"></div><div class="featured-action"><a href="videos.html" class="btn btn-ghost">Ver galería de videos</a></div></div></section>
 
-  <section id="facultad" class="section facultad-section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">La Facultad</span>
-        <h2>Ingeniería Mecatrónica<br>en la UDH</h2>
-      </div>
-      <div class="facultad-grid">
-        <div class="facultad-mission">
-          <h3>Formación multidisciplinaria</h3>
-          <p>
-            La Ingeniería Mecatrónica integra mecánica, electrónica, informática y control para diseñar soluciones tecnológicas aplicadas.
-          </p>
-          <p>
-            Este sitio servirá como vitrina documentada para los proyectos desarrollados durante la pasantía.
-          </p>
-          <div class="disciplinas">
-            <span>Mecánica</span>
-            <span>Electrónica</span>
-            <span>Informática</span>
-            <span>Control</span>
-          </div>
-        </div>
-        <div class="facultad-offerings">
-          <div class="offering-card">
-            <div class="off-icon">✦</div>
-            <div>
-              <h4>Proyectos estudiantiles</h4>
-              <p>Publicaciones con evidencia, proceso, recursos y resultados.</p>
-            </div>
-          </div>
-          <div class="offering-card">
-            <div class="off-icon">▶</div>
-            <div>
-              <h4>Videos integrados</h4>
-              <p>Soporte para enlaces de YouTube dentro de cada publicación.</p>
-            </div>
-          </div>
-          <div class="offering-card">
-            <div class="off-icon">▧</div>
-            <div>
-              <h4>Galería por proyecto</h4>
-              <p>Imágenes locales organizadas por carpeta de proyecto.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section id="facultad" class="section facultad-section"><div class="container"><div class="section-header"><span class="section-tag">La Facultad</span><h2>Ingeniería Mecatrónica<br>en la UDH</h2></div><div class="facultad-grid"><div class="facultad-mission"><h3>Formación multidisciplinaria</h3><p>En la Facultad de Ingeniería Mecatrónica de la Universidad de Defensa de Honduras nos dedicamos a formar profesionales altamente capacitados en el campo de la mecatrónica.</p><p>Nuestro objetivo es cultivar talento técnico para enfrentar retos tecnológicos y contribuir al desarrollo sostenible de Honduras.</p><div class="disciplinas"><span>Mecánica</span><span>Electrónica</span><span>Informática</span><span>Control</span></div></div><div class="facultad-offerings"><div class="offering-card"><div class="off-icon">✦</div><div><h4>Proyectos estudiantiles</h4><p>Publicaciones con evidencia, proceso, recursos y resultados.</p></div></div><div class="offering-card"><div class="off-icon">▶</div><div><h4>Capacitaciones</h4><p>Visitas técnicas y prácticas documentadas.</p></div></div><div class="offering-card"><div class="off-icon">▧</div><div><h4>Galería por publicación</h4><p>Imágenes locales organizadas por cada experiencia.</p></div></div></div></div></div></section>
 
-  <section class="cta-section">
-    <div class="container">
-      <div class="cta-inner">
-        <span class="section-tag white-tag">UDH</span>
-        <h2>Proyectos con evidencia</h2>
-        <p>El sitio queda listo para crecer con publicaciones reales de la promoción.</p>
-        <div class="cta-buttons">
-          <a href="https://udh.edu.hn" target="_blank" rel="noopener noreferrer" class="btn btn-white">Ingresar a UDH</a>
-          <a href="https://sites.google.com/udh.edu.hn/mecatronica-v/inicio" target="_blank" rel="noopener noreferrer" class="btn btn-outline-white">Sitio original</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <div class="footer-logo">
-            <span class="logo-badge">IMM</span>
-            <span class="logo-roman">V</span>
-          </div>
-          <p>Quinta Promoción de Ingeniería Mecatrónica<br>Universidad de Defensa de Honduras</p>
-        </div>
-        <div class="footer-links">
-          <a href="#inicio">Inicio</a>
-          <a href="#nosotros">Nosotros</a>
-          <a href="#proyectos">Blog de proyectos</a>
-          <a href="#facultad">Facultad</a>
-          <a href="editor.html">Crear post</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2026 IMM-V · Quinta Promoción de Mecatrónica · UDH</p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="posts.js"></script>
-  <script src="main.js"></script>
+  <footer class="site-footer"><div class="container"><div class="footer-inner"><div class="footer-brand"><img class="footer-logo-img" src="assets/images/udhlogo1.png" alt="Logo secundario UDH"><p>Quinta Promoción de Ingeniería Mecatrónica<br>Universidad de Defensa de Honduras</p></div><div class="footer-links"><a href="index.html">Inicio</a><a href="#nosotros">Nosotros</a><a href="projects.html">Proyectos</a><a href="videos.html">Videos</a><a href="#facultad">Facultad</a><a href="editor.html" class="admin-only" hidden>Crear post</a></div><form class="access-form" data-access-form><h3>Acceso</h3><input name="username" autocomplete="username" placeholder="Usuario"><input name="password" type="password" autocomplete="current-password" placeholder="Contraseña"><button type="submit">Entrar</button><small data-access-status></small></form></div><div class="footer-bottom"><p>© 2026 · Quinta Promoción en Mecatrónica · UDH</p></div></div></footer>
+  <script src="posts.js"></script><script src="videos.js"></script><script src="main.js"></script><script src="access.js"></script>
 </body>
 </html>
