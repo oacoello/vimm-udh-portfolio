@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editor de posts · IMM-V</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-badge">IMM</span>
+        <span class="logo-roman">V</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Volver al sitio</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="editor-page">
+    <section class="container">
+      <div class="editor-header">
+        <span class="section-tag">Editor visual</span>
+        <h1>Crear post de proyecto</h1>
+        <p>Completá el formulario, revisá la previsualización y copiá el bloque generado en <strong>posts.js</strong>.</p>
+      </div>
+
+      <div class="editor-layout">
+        <form id="postEditorForm" class="editor-form">
+          <fieldset>
+            <legend>Información principal</legend>
+            <label>Título del proyecto <input name="title" required placeholder="Ej. Brazo robótico educativo"></label>
+            <label>Autor o equipo <input name="author" placeholder="Ej. Equipo Alfa"></label>
+            <label>Fecha <input name="date" type="date"></label>
+            <label>Categoría <input name="category" placeholder="Ej. Robótica"></label>
+            <label>Etiquetas <input name="tags" placeholder="Arduino, sensores, control"></label>
+            <label>Resumen <textarea name="excerpt" rows="3" placeholder="Resumen corto para la tarjeta del blog"></textarea></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Contenido</legend>
+            <label>Texto del post <textarea name="content" rows="9" placeholder="Escribí el post. Separá párrafos con una línea en blanco."></textarea></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Multimedia y recursos</legend>
+            <label>Imagen de portada <input name="coverImage" placeholder="assets/proyectos/mi-proyecto/portada.jpg"></label>
+            <label>Imágenes de galería <textarea name="images" rows="4" placeholder="Una ruta por línea"></textarea></label>
+            <label>Videos de YouTube <textarea name="youtube" rows="4" placeholder="Un enlace por línea"></textarea></label>
+            <label>Links externos <textarea name="links" rows="4" placeholder="Etiqueta | https://enlace.com"></textarea></label>
+          </fieldset>
+
+          <div class="editor-actions">
+            <button type="button" class="btn btn-primary" id="copyPost">Copiar bloque</button>
+            <button type="button" class="btn btn-ghost" id="downloadPost">Descargar .txt</button>
+            <button type="reset" class="btn btn-ghost">Limpiar</button>
+          </div>
+        </form>
+
+        <aside class="editor-output">
+          <div class="preview-panel">
+            <h2>Previsualización</h2>
+            <article id="postPreview" class="blog-card"></article>
+          </div>
+          <div class="code-panel">
+            <h2>Bloque para posts.js</h2>
+            <pre><code id="generatedPost"></code></pre>
+            <p id="editorStatus" class="editor-status" aria-live="polite"></p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script src="editor.js"></script>
+</body>
+</html>
