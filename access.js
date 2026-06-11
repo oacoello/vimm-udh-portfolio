@@ -3,7 +3,6 @@ const ACCESS_PASSWORD = 'ares8814';
 
 function setAdminAccess(enabled) {
   document.querySelectorAll('.admin-only').forEach((item) => { item.hidden = !enabled; });
-  localStorage.setItem('immvAdminAccess', enabled ? 'true' : 'false');
 }
 
 document.querySelectorAll('[data-access-form]').forEach((form) => {
@@ -18,4 +17,4 @@ document.querySelectorAll('[data-access-form]').forEach((form) => {
   });
 });
 
-setAdminAccess(localStorage.getItem('immvAdminAccess') === 'true');
+setAdminAccess(false);

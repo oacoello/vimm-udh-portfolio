@@ -1,7 +1,3 @@
-if (localStorage.getItem('immvAdminAccess') !== 'true') {
-  window.location.href = 'index.html';
-}
-
 const form = document.getElementById('postEditorForm');
 const generatedPost = document.getElementById('generatedPost');
 const postPreview = document.getElementById('postPreview');
